@@ -15,17 +15,12 @@ class QuizBrain:
         self.current_question = self.question_list[self.question_number]
         self.question_number += 1
         q_text= html.unescape(self.current_question.text)
-        return f"Q.{self.question_number}: {q_text} (True/False): "
+        return f"Q.{self.question_number}: {q_text}"
 
     def check_answer(self, player_ans):
         correct_answer = self.current_question.answer
         if player_ans.lower() == correct_answer.lower():
             self.score += 1
-            self.next_question()
-            print("You got it right!")
+            return True
         else:
-            print("That's wrong.")
-            self.next_question()
-
-        print(f"Your current score is: {self.score}/{self.question_number}")
-        print("\n")
+            return False
